@@ -1,4 +1,4 @@
-# GuideFit 
+# GuideFit (NECESSITA SER ATUALIZADO)
 
 Sistema de treino personalizado desenvolvido com React, Node.js e PostgreSQL.
 
