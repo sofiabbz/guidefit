@@ -46,7 +46,6 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg); }
   background: transparent;
 }
 
-/* inner card */
 form, .logo-wrap, .title, .login-link-wrap, .erro-geral {
   max-width: 400px;
   width: 100%;

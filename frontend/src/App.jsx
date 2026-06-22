@@ -1,21 +1,23 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import Cadastro from './pages/Cadastro'
-
-// TODO: importar as demais páginas quando forem criadas
-// import Login from './pages/Login'
-// import Onboarding from './pages/Onboarding'
-// import Dashboard from './pages/Dashboard'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Dashboard from './pages/Dashboard'; 
+import Progresso from './pages/Progresso';
+import Historico from './pages/Historico';
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
-        <Route path="/"          element={<Navigate to="/cadastro" />} />
-        <Route path="/cadastro"  element={<Cadastro />} />
-        {/* Adicionar rotas aqui conforme as páginas forem criadas */}
+        {/* Se entrar no link puro, redireciona direto para o seu Dashboard */}
+        <Route path="/" element={<Navigate to="/dashboard" />} />
+        
+        {/* Rotas oficiais do site */}
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/progresso" element={<Progresso />} />
+        <Route path="/historico" element={<Historico />} />
       </Routes>
-    </BrowserRouter>
-  )
+    </Router>
+  );
 }
 
-export default App
+export default App;

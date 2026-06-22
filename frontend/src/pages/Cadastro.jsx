@@ -11,7 +11,7 @@ function Cadastro() {
   const [loading, setLoading] = useState(false)
   const [forca, setForca]   = useState({ nivel: 0, texto: '', cor: '' })
 
-  // ── Atualiza campos ───────────────────────────────────────────────────────
+  // Atualiza campos 
   function handleChange(e) {
     const { name, value } = e.target
     setForm(prev => ({ ...prev, [name]: value }))
@@ -19,7 +19,7 @@ function Cadastro() {
     if (name === 'senha') avaliarSenha(value)
   }
 
-  // ── Força da senha ────────────────────────────────────────────────────────
+  // Força da senha 
   function avaliarSenha(valor) {
     let pontos = 0
     if (valor.length >= 8)                             pontos++
@@ -35,7 +35,7 @@ function Cadastro() {
     setForca(niveis[pontos] || niveis[0])
   }
 
-  // ── Validação ─────────────────────────────────────────────────────────────
+  //  Validação 
   function validar() {
     const novosErros = {}
     if (!form.nome)                                              novosErros.nome      = 'Informe seu nome.'
@@ -46,7 +46,7 @@ function Cadastro() {
     return Object.keys(novosErros).length === 0
   }
 
-  // ── Envio ─────────────────────────────────────────────────────────────────
+  // Envio 
   async function handleSubmit(e) {
     e.preventDefault()
     if (!validar()) return
