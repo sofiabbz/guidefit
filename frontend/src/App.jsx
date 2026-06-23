@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Cadastro from './paginas/Cadastro'
 import Login from './paginas/Login'
 import Onboarding from './paginas/Onboarding'
-
+import Dashboard from '.paginas/Dashboard'
 
 // TODO: importar as demais páginas quando forem criadas
 // import Onboarding from './paginas/Onboarding'
@@ -16,6 +16,7 @@ function Aplicacao() {
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/login"    element={<Login />} />
         <Route path="/onboarding" element={<Onboarding />} />
+        <Route path="/dashboard" element={<dashboard />} />
         {/* Adicionar rotas aqui conforme as páginas forem criadas */}
       </Routes>
     </BrowserRouter>
