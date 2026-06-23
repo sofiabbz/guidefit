@@ -86,7 +86,7 @@ export default function Onboarding() {
         localTreino: dados.localTreino
       })
 
-      navegar('/painel')
+      navegar('/dashboard')
     } catch (erro) {
       const mensagem = erro.response?.data?.erro || 'Erro ao salvar perfil. Tente novamente.'
       setErroGeral(mensagem)
