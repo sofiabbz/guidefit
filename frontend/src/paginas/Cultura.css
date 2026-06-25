@@ -1,0 +1,83 @@
+.cultura-page {
+  min-height: 100vh;
+  background: #4a9688;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  position: relative;
+  color: white;
+}
+
+.cultura-page .btn-voltar {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cultura-logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.cultura-logo-wrap .logo-icon { width: 40px; height: 40px; }
+.cultura-logo-wrap .logo-text { font-size: 1.6rem; font-weight: bold; color: white; }
+
+.cultura-titulo {
+  color: white;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.cultura-content {
+  display: flex;
+  gap: 20px;
+  max-width: 700px;
+  width: 100%;
+  align-items: flex-start;
+}
+
+.cultura-valores {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-width: 160px;
+}
+
+.cultura-valores ul {
+  list-style: disc;
+  padding-left: 16px;
+  line-height: 2;
+}
+
+.cultura-missao {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cultura-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.icone {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}

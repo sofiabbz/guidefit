@@ -1,3 +1,6 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -7,21 +10,35 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// ════════════════════════════════════════════════════════════════════════════
+// AUTENTICAÇÃO
+// ════════════════════════════════════════════════════════════════════════════
+
 model Usuario {
-  id        String   @id @default(uuid())
-  nome      String
-  email     String   @unique
-  senhaHash String   @map("senha_hash")
-  criadoEm  DateTime @default(now()) @map("criado_em")
-  perfilFisico PerfilFisico?
+  id                String   @id @default(uuid())
+  nome              String
+  email             String   @unique
+  senhaHash         String   @map("senha_hash")
+  criadoEm          DateTime @default(now()) @map("criado_em")
+
+  // Relações
+  perfilFisico      PerfilFisico?
+  planosTreino      PlanoTreino[]
+  registrosTreino   RegistroTreino[]
+  registrosPeso     RegistroPeso[]
+  progresso         Progresso?
 
   @@map("usuarios")
 }
 
+// ════════════════════════════════════════════════════════════════════════════
+// PERFIL FÍSICO
+// ════════════════════════════════════════════════════════════════════════════
+
 model PerfilFisico {
   id              String   @id @default(uuid())
   usuarioId       String   @unique
-  usuario         Usuario  @relation(fields: [usuarioId], references: [id])
+  usuario         Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
   peso            Float
   altura          Float
   idade           Int
@@ -31,4 +48,125 @@ model PerfilFisico {
   dataAtualizacao DateTime @default(now()) @updatedAt
 
   @@map("perfil_fisico")
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// PLANO DE TREINO
+// ════════════════════════════════════════════════════════════════════════════
+
+model PlanoTreino {
+  id              String   @id @default(uuid())
+  usuarioId       String
+  usuario         Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  dataGeracao     DateTime @default(now())
+  ativo           Boolean  @default(true)
+
+  // Relações
+  diasTreino      DiaTreino[]
+
+  @@map("plano_treino")
+}
+
+model DiaTreino {
+  id              String   @id @default(uuid())
+  planoTreinoId   String
+  planoTreino     PlanoTreino @relation(fields: [planoTreinoId], references: [id], onDelete: Cascade)
+  diaSemana       String
+  tipo            String   // "treino" ou "descanso"
+
+  // Relações
+  diasExercicio   DiaExercicio[]
+
+  @@map("dia_treino")
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// EXERCÍCIOS
+// ════════════════════════════════════════════════════════════════════════════
+
+model Exercicio {
+  id              String   @id @default(uuid())
+  nome            String
+  descricao       String?
+  grupoMuscular   String
+  series          Int
+  repeticoes      Int
+  instrucoes      String?
+
+  // Relações
+  diasExercicio   DiaExercicio[]
+  registrosExercicio RegistroExercicio[]
+
+  @@map("exercicio")
+}
+
+model DiaExercicio {
+  id              String   @id @default(uuid())
+  diaId           String
+  dia             DiaTreino @relation(fields: [diaId], references: [id], onDelete: Cascade)
+  exercicioId     String
+  exercicio       Exercicio @relation(fields: [exercicioId], references: [id], onDelete: Cascade)
+  ordem           Int
+
+  @@map("dia_exercicio")
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// REGISTROS DE TREINO (Histórico)
+// ════════════════════════════════════════════════════════════════════════════
+
+model RegistroTreino {
+  id              String   @id @default(uuid())
+  usuarioId       String
+  usuario         Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  data            DateTime @default(now())
+  duracao         Int      // em minutos
+  concluido       Boolean  @default(false)
+  dataConclusao   DateTime?
+
+  // Relações
+  exercicios      RegistroExercicio[]
+
+  @@map("registro_treino")
+}
+
+model RegistroExercicio {
+  id              String   @id @default(uuid())
+  registroId      String
+  registro        RegistroTreino @relation(fields: [registroId], references: [id], onDelete: Cascade)
+  exercicioId     String
+  exercicio       Exercicio @relation(fields: [exercicioId], references: [id], onDelete: Cascade)
+  concluido       Boolean  @default(false)
+
+  @@map("registro_exercicio")
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// PROGRESSO
+// ════════════════════════════════════════════════════════════════════════════
+
+model Progresso {
+  id              String   @id @default(uuid())
+  usuarioId       String   @unique
+  usuario         Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  totalTreinos    Int      @default(0)
+  totalExercicios Int      @default(0)
+  frequenciaSemanal Float  @default(0)
+  dataAtualizacao DateTime @default(now()) @updatedAt
+
+  @@map("progresso")
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// REGISTRO DE PESO
+// ════════════════════════════════════════════════════════════════════════════
+
+model RegistroPeso {
+  id              String   @id @default(uuid())
+  usuarioId       String
+  usuario         Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  peso            Float
+  dataRegistro    DateTime @default(now())
+
+  @@map("registro_peso")
 }

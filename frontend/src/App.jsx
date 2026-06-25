@@ -6,6 +6,9 @@ import Onboarding from './paginas/Onboarding';
 import Dashboard from './paginas/Dashboard';
 import Progresso from './paginas/Progresso';
 import Historico from './paginas/Historico';
+import SobreNos from './paginas/SobreNos';      
+import Cultura from './paginas/Cultura';        
+import Sac from './paginas/Sac';                
 
 function Aplicacao() {
   return (
@@ -28,6 +31,11 @@ function Aplicacao() {
         {/* NOVAS FUNCIONALIDADES */}
         <Route path="/progresso" element={<Progresso />} />
         <Route path="/historico" element={<Historico />} />
+
+        {/* PÁGINAS INFORMATIVAS */}
+        <Route path="/sobre-nos" element={<SobreNos />} />  
+        <Route path="/cultura" element={<Cultura />} />    
+        <Route path="/sac" element={<Sac />} />             
 
         {/* FALLBACK */}
         <Route path="*" element={<Navigate to="/login" />} />

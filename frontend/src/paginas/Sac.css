@@ -1,0 +1,80 @@
+.sac-page {
+  min-height: 100vh;
+  background: #3a7a8a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  position: relative;
+  color: white;
+}
+
+.sac-page .btn-voltar {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: #4a9688;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sac-logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  margin-bottom: 60px;
+}
+
+.sac-logo-wrap .logo-icon { width: 40px; height: 40px; }
+.sac-logo-wrap .logo-text { font-size: 1.6rem; font-weight: bold; color: white; }
+
+.sac-card {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 30px 40px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+}
+
+.sac-card p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.sac-email {
+  display: block;
+  background: #6fcf97;
+  color: white;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.sac-page .sac-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.sac-page .footer-sac-label {
+  background: #4a9688;
+  color: white;
+  text-align: center;
+  padding: 12px;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}

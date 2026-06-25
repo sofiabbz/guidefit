@@ -4,6 +4,7 @@ import api from "../servicos/api"
 import './Login.css'
 import logoImg from "/logo.png"
 
+
 export default function Login() {
   const [dados, setDados] = useState({
     email: '',
@@ -147,11 +148,12 @@ export default function Login() {
         </div>
       </main>
 
-      <footer>
-        <a href="#" className="linha-rodape rodape-sobre">Sobre</a>
-        <a href="#" className="linha-rodape rodape-cultura">Cultura</a>
-        <a href="#" className="linha-rodape rodape-sac">SAC</a>
-      </footer>
+<footer>
+  <Link to="/sobre-nos" className="linha-rodape rodape-sobre">Sobre Nós</Link>
+  <Link to="/cultura" className="linha-rodape rodape-cultura">Cultura</Link>
+  <Link to="/sac" className="linha-rodape rodape-sac">SAC</Link>
+</footer>
+
     </div>
   )
 }

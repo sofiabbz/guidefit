@@ -1,38 +1,39 @@
-import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import './Historico.css';
 
 function Historico() {
-  const [historico, setHistorico] = useState([]);
-
-  useEffect(() => {
-    const dados =
-      JSON.parse(localStorage.getItem("historicoTreinos")) || [];
-
-    setHistorico(dados.reverse());
-  }, []);
+  const navegar = useNavigate();
+  const historico =
+    JSON.parse(localStorage.getItem('historicoTreinos')) || [];
 
   return (
-    <div style={{ padding: 20 }}>
-      <h2>📅 Histórico de Treinos</h2>
+    <div className="historico-page">
+      <div className="historico-card">
+        <h1 className="historico-title">Histórico de Treinos</h1>
 
-      {historico.length === 0 && <p>Nenhum treino registrado.</p>}
+        {historico.length === 0 ? (
+          <p className="historico-vazio">
+            Você ainda não realizou nenhum check-in.
+          </p>
+        ) : (
+          <div className="historico-lista">
+            {[...historico].reverse().map((treino) => (
+              <div className="historico-item" key={treino.id}>
+                <div className="historico-data">{treino.data}</div>
+                <div className="historico-dia">{treino.dia}</div>
+                <p className="historico-exercicio">{treino.foco}</p>
+              </div>
+            ))}
+          </div>
+        )}
 
-      {historico.map((item, index) => (
-        <div key={index} style={{
-          border: "1px solid #ccc",
-          marginBottom: 10,
-          padding: 10,
-          borderRadius: 8
-        }}>
-          <h3>{item.data} - {item.dia}</h3>
-
-          {item.exercicios.map((ex, i) => (
-            <p key={i}>
-              • {ex.nome} ({ex.series} {ex.reps})
-            </p>
-          ))}
-        </div>
-      ))}
+        <button
+          className="btn-voltar"
+          onClick={() => navegar('/dashboard')}
+        >
+          Voltar ao Dashboard
+        </button>
+      </div>
     </div>
   );
 }
